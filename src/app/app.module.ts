@@ -6,9 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { IntroHeaderComponent } from './components/intro-header/intro-header.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
-import { SearchInputComponent } from './components/search-input/search-input.component';
 import { ToDoCreateBarComponent } from './components/to-do-create-bar/to-do-create-bar.component';
+import { SearchFilterBarComponent } from './components/search-filter-bar/search-filter-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
+import { CountState } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,14 @@ import { HttpClientModule } from '@angular/common/http';
     TodoListComponent,
     IntroHeaderComponent,
     TodoItemComponent,
-    SearchInputComponent,
-    ToDoCreateBarComponent
+    ToDoCreateBarComponent,
+    SearchFilterBarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxsModule.forRoot([CountState])
   ],
   providers: [],
   bootstrap: [AppComponent]

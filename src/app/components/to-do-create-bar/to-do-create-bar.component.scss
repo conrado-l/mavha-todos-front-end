@@ -1,6 +1,12 @@
+.todo-create-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .todo-create-bar-input {
   height: 40px;
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid darkgrey;
@@ -15,4 +21,11 @@
   &:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
   &:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
   &:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+}
+
+.todo-create-bar-button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 50%;
 }

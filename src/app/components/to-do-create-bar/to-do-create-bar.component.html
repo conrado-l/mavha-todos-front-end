@@ -4,4 +4,6 @@
          placeholder="Escribe aquí el nuevo to-do.."
          [(ngModel)]="description"
          (keydown.enter)="createTodo()">
+  <button class="todo-create-bar-button" (click)="createTodo()">+</button>
+  <div> {{count$ | async}}</div>
 </div>

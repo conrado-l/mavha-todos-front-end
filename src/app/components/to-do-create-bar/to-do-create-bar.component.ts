@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Store, Select} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {Add, CountState} from '../../store/app.state';
 
 @Component({
   selector: 'app-to-do-create-bar',
@@ -8,12 +11,20 @@ import {Component, OnInit} from '@angular/core';
 export class ToDoCreateBarComponent implements OnInit {
   description: string = '';
 
+  @Select(CountState) count$: Observable<number>;
+
+  constructor(private store: Store) {
+  }
+
   createTodo(): void {
-    if (!this.description.length) {
-      return;
-    }
-    console.log(this.description);
+    console.log('Click');
+    // if (!this.description.length) {
+    //   return;
+    // }
+
+    this.store.dispatch(new Add());
     this.description = '';
+
   }
 
   ngOnInit() {

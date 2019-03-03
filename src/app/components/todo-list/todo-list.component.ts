@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo} from '../../interfaces/Todo';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,28 +10,19 @@ import {Todo} from '../../interfaces/Todo';
 export class TodoListComponent implements OnInit {
   todos: Todo[];
 
-  constructor() {
+  constructor(public rest: RestService) {
   }
 
   ngOnInit() {
-    this.todos = [
-      {
-        id: 1,
-        description: 'Cook dinner',
-        status: false,
-        attachment: 'plate.jpg',
-        createdAt: 'today',
-        updatedAt: 'tomorrow'
-      },
-      {
-        id: 1,
-        description: 'Cook dinner',
-        status: false,
-        attachment: 'dinner.jpg',
-        createdAt: 'today',
-        updatedAt: 'tomorrow'
-      }
-    ];
+    this.getTodos();
+  }
+
+  getTodos() {
+    this.todos = [];
+    this.rest.getTodos().subscribe((data: Todo[]) => {
+      console.log(data);
+      this.todos = data;
+    });
   }
 }
 

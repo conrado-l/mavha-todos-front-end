@@ -1,0 +1,18 @@
+<div class="search-filter-bar">
+  <input class="search-input" placeholder="Buscar" name="search-term">
+  <select class="select-filter" name="filter" id="filter-select">
+    <option value="description" selected> Descripción</option>
+    <option value="id"> ID</option>
+  </select>
+  <div class="select-status-container" title="Filtrar todos"> <!--TODO: use an object and iterate over states (*ngFor)-->
+    <div class="select-status-option">
+      <span class="select-status-option-text"> Todos </span>
+    </div>
+    <div class="select-status-option" title="Filtrar pendientes">
+      <span class="select-status-option-text"> Pendientes </span>
+    </div>
+    <div class="select-status-option" title="Filtrar completados">
+      <span class="select-status-option-text"> Completados </span>
+    </div>
+  </div>
+</div>
