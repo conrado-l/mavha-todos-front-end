@@ -1,5 +1,10 @@
 <div class="todo-app-wrapper">
   <div class="todo-list-container">
+    <app-to-do-create-bar></app-to-do-create-bar>
+    <app-todo-item *ngFor="let todo of todos"
+                   [description]="todo.description">
+
+    </app-todo-item>
 
   </div>
 </div>

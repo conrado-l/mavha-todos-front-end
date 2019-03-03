@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Todo} from '../../interfaces/Todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  todos: object[];
+  todos: Todo[];
 
   constructor() {
   }
@@ -16,14 +17,20 @@ export class TodoListComponent implements OnInit {
       {
         id: 1,
         description: 'Cook dinner',
-        status: false
+        status: false,
+        attachment: 'plate.jpg',
+        createdAt: 'today',
+        updatedAt: 'tomorrow'
       },
       {
-        id: 2,
-        description: 'Angular',
-        status: true
+        id: 1,
+        description: 'Cook dinner',
+        status: false,
+        attachment: 'dinner.jpg',
+        createdAt: 'today',
+        updatedAt: 'tomorrow'
       }
     ];
   }
-
 }
+

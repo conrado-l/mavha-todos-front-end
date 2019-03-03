@@ -1,0 +1,7 @@
+<div class="todo-create-bar">
+  <input class="todo-create-bar-input"
+         name="description"
+         placeholder="Escribe aquí el nuevo to-do.."
+         [(ngModel)]="description"
+         (keydown.enter)="createTodo()">
+</div>
