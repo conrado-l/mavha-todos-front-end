@@ -1,7 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TodoFilterState} from '../../interfaces/todoFilterState';
-import {CategoryQuery} from '../../stateOld/store.query';
-import {CategoryStoreService} from '../../stateOld/store.service';
 
 @Component({
   selector: 'app-search-filter-bar',

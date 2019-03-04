@@ -11,7 +11,7 @@ import {APIService} from '../../services/todos.service';
 })
 export class TodoListComponent implements OnInit {
   todos: Observable<Todo[]>;
-  status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
+  status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
   filter = {
     name: 'description',
     value: ''
