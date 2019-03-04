@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Todo} from '../../interfaces/Todo';
-import {RestService} from '../../services/rest.service';
+import {Observable} from 'rxjs';
+import {TodosService} from '../../services/todos.service';
+import {Todo} from '../../interfaces/todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,21 +9,41 @@ import {RestService} from '../../services/rest.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  todos: Todo[];
+  todos: Observable<Todo[]>;
+  status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
+  filter = {
+    name: 'description',
+    value: ''
+  };
 
-  constructor(public rest: RestService) {
+  constructor(private todoService: TodosService) {
   }
 
   ngOnInit() {
     this.getTodos();
   }
 
-  getTodos() {
-    this.todos = [];
-    this.rest.getTodos().subscribe((data: Todo[]) => {
-      console.log(data);
-      this.todos = data;
-    });
+  updateSearchTerm(term: string) {
+    if (this.filter.value === term) {
+      return;
+    }
+    this.filter.value = term;
+    this.getTodos();
   }
+
+  updateFilter(filter: string) {
+    this.filter.name = filter;
+    this.getTodos();
+  }
+
+  updateStatus(status: string) {
+    this.status = status;
+    this.getTodos();
+  }
+
+  getTodos() {
+    this.todos = this.todoService.getTodos({status: this.status, filter: this.filter});
+  }
+
 }
 

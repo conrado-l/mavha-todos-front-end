@@ -4,7 +4,7 @@
   justify-content: space-between;
 }
 
-.todo-create-bar-input {
+.create-input {
   height: 40px;
   width: 90%;
   padding: 10px;
@@ -12,20 +12,56 @@
   border: 1px solid darkgrey;
   font-size: 20px;
 
-  &:focus {
+  &:focus { // Extract to SASS mixin
     outline: none;
-    border: 2px solid dodgerblue;
+    border: 1px solid dodgerblue;
   }
 
-  &:focus::-webkit-input-placeholder { color:transparent; } /* Hide placeholder on focus */
-  &:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
-  &:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
-  &:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+  &:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+  /* Hide placeholder on focus */
+  &:focus:-moz-placeholder {
+    color: transparent;
+  }
+  /* FF 4-18 */
+  &:focus::-moz-placeholder {
+    color: transparent;
+  }
+  /* FF 19+ */
+  &:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+  /* IE 10+ */
 }
 
-.todo-create-bar-button {
+.button {
+  display: inline-block;
   height: 40px;
   width: 40px;
   border: none;
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.31); // TODO: extract to SASS variable
+  cursor: pointer;
+}
+
+.upload-file-button {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.selected-file-section {
+  display: flex;
+  align-items: center;
+  height: 15px;
+  margin: 15px 0;
+}
+
+.remove-attachment-button {
+  margin-left: 7px;
+  height: 30px;
+  width: 30px;
+  background-color: #f44336; // TODO: extract to SASS variable
 }

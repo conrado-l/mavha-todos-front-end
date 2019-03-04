@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {TodoFilterState} from '../../interfaces/todoFilterState';
+import {CategoryQuery} from '../../state/store.query';
+import {CategoryStoreService} from '../../state/store.service';
 
 @Component({
   selector: 'app-search-filter-bar',
@@ -6,10 +9,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-filter-bar.component.scss']
 })
 export class SearchFilterBarComponent implements OnInit {
-
-  constructor() { }
+  states: TodoFilterState[];
+  activeStatus = 'status'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
+  filter = {
+    name: 'description',
+    value: ''
+  };
+  @Output() termInput = new EventEmitter();
+  @Output() filterChange = new EventEmitter();
+  @Output() statusChange = new EventEmitter();
 
   ngOnInit() {
+    this.states = [
+      {
+        name: 'Todos',
+        value: 'all'
+      },
+      {
+        name: 'Pendientes',
+        value: 'pending'
+      },
+      {
+        name: 'Completados',
+        value: 'completed'
+      }
+    ];
+  }
+
+  updateSearchTerm(description: string) {
+    this.termInput.emit(description);
+  }
+
+  updateFilter(filter: string) {
+    this.filter.name = filter;
+    this.filterChange.emit(filter);
+  }
+
+  updateStatus(status: string): void {
+    this.activeStatus = status;
+    this.statusChange.emit(status);
   }
 
 }

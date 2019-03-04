@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RestService } from './rest.service';
+import { RestService } from './todos.service';
 
 describe('RestService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

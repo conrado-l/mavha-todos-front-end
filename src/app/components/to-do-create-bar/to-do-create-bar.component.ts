@@ -1,33 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {Store, Select} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {Add, CountState} from '../../store/app.state';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {TodosService} from "../../services/todos.service";
 
 @Component({
   selector: 'app-to-do-create-bar',
   templateUrl: './to-do-create-bar.component.html',
   styleUrls: ['./to-do-create-bar.component.scss']
 })
-export class ToDoCreateBarComponent implements OnInit {
-  description: string = '';
+export class ToDoCreateBarComponent {
+  description = '';
+  attachment = null;
 
-  @Select(CountState) count$: Observable<number>;
-
-  constructor(private store: Store) {
+  constructor(private todoService: TodosService) {
   }
+
+  @Output() createClicked = new EventEmitter();
 
   createTodo(): void {
-    console.log('Click');
-    // if (!this.description.length) {
-    //   return;
-    // }
-
-    this.store.dispatch(new Add());
+    this.todoService.createTodo(this.description, this.attachment);
     this.description = '';
-
+    this.attachment = '';
   }
 
-  ngOnInit() {
+  selectAttachment(files): void {
+    if (files.length !== 1) {
+      return;
+    }
+    this.attachment = files[0];
+  }
+
+  removeAttachment(): void {
+    this.attachment = null;
   }
 
 }

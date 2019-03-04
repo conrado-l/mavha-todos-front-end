@@ -17,11 +17,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 220px;
+  max-width: 60vw;
+
+  &.completed {
+    text-decoration: line-through;
+  }
+}
+
+.todo-actions {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-delete {
-  display: inline-block;
-  position: absolute;
-  right: 15px;
+  //position: absolute;
+  //right: 15px;
+}
+
+.todo-download {
+  //position: absolute;
+  //right: 45px;
 }

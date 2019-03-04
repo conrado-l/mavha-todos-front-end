@@ -12,12 +12,23 @@
   border: 1px solid gainsboro;
   border-radius: 20px; // TODO: extract to SASS variable
   font-size: 15px;
+
+  &:focus { // Extract to SASS mixin
+    outline: none;
+    border: 1px solid dodgerblue;
+  }
+
+  &:focus::-webkit-input-placeholder { color:transparent; } /* Hide placeholder on focus */ // Extract to SASS mixin
+  &:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+  &:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+  &:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 }
 
 .select-filter {
   height: 35px;
   border: 1px solid gainsboro;
   border-radius: 7px; // TODO: extract to SASS variable
+  font-size: 15px;
 }
 
 .select-status-container {
@@ -38,11 +49,12 @@
   cursor: pointer;
 
   &.active {
-    background-color: dodgerblue;
+    background-color: #1e90ff4d;
   }
 }
 
 .select-status-option-text {
   color: rgba(0, 0, 0, .87); // Extract to SASS variable
   font-size: 14px;
+  user-select: none;
 }

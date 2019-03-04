@@ -1,9 +1,22 @@
 <div class="todo-create-bar">
-  <input class="todo-create-bar-input"
+  <input class="create-input"
          name="description"
          placeholder="Escribe aquí el nuevo to-do.."
          [(ngModel)]="description"
          (keydown.enter)="createTodo()">
-  <button class="todo-create-bar-button" (click)="createTodo()">+</button>
-  <div> {{count$ | async}}</div>
+  <label class="button upload-file-button" for="file-upload" title="Adjuntar archivo">U</label>
+
+  <button class="button" (click)="createTodo()" title="Crear todo">+</button>
+  <input type="file"
+         id="file-upload"
+         class="hidden"
+         accept="image/png,image/jpeg,image/gif,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+         (change)="selectAttachment($event.target.files)">
+</div>
+
+<div *ngIf="attachment" class="selected-file-section">
+  <div class="selected-filename">
+    Archivo seleccionado: {{attachment.name}}
+  </div>
+  <button class="button remove-attachment-button" (click)="removeAttachment()" title="Eliminar archivo adjunto"> X</button>
 </div>
