@@ -8,8 +8,9 @@
     <option value="description" selected> Descripción</option>
     <option value="id"> ID</option>
   </select>
-  <div class="select-status-container" title="Filtrar todos">
+  <div class="select-status-container" >
     <div class="select-status-option"
+         title="Filtrar {{state.name | lowercase}}"
          *ngFor="let state of states"
          [ngClass]="{'active' : activeStatus === state.value}"
          (click)="updateStatus(state.value)">

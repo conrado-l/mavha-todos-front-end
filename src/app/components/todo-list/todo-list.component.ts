@@ -10,15 +10,16 @@ import {APIService} from '../../services/todos.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
+
+  constructor(private apiService: APIService) {
+  }
+
   todos: Observable<Todo[]>;
   status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
   filter = {
     name: 'description',
     value: ''
   };
-
-  constructor(private apiService: APIService) {
-  }
 
   ngOnInit() {
     this.getTodos();
