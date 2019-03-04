@@ -46,6 +46,10 @@
   border-radius: 50%;
   background-color: lightgray; // TODO: extract to SASS variable
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .upload-file-button {
