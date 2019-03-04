@@ -6,7 +6,7 @@ import {map, catchError, tap} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TodosService {
+export class APIService {
   endpoint: string = 'http://localhost:8080/todo/'; // TODO: extract url and port to .env
   httpOptions = {
     headers: new HttpHeaders({

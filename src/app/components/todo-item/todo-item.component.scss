@@ -17,7 +17,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 60vw;
+  max-width: 85%;
 
   &.completed {
     text-decoration: line-through;
@@ -32,12 +32,16 @@
   align-items: center;
 }
 
-.todo-delete {
-  //position: absolute;
-  //right: 15px;
+.download-attachment {
+  text-decoration: none;
+  color: black;
 }
 
-.todo-download {
-  //position: absolute;
-  //right: 45px;
+.button {
+  height: 35px;
+  width: 35px;
+  margin: 0 5px;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+  cursor: pointer;
 }

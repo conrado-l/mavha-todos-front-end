@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {TodosService} from '../../services/todos.service';
 import {Todo} from '../../interfaces/todo';
+import {TodoService} from '../../state';
+import {APIService} from '../../services/todos.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,13 +11,13 @@ import {Todo} from '../../interfaces/todo';
 })
 export class TodoListComponent implements OnInit {
   todos: Observable<Todo[]>;
-  status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
+  status = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
   filter = {
     name: 'description',
     value: ''
   };
 
-  constructor(private todoService: TodosService) {
+  constructor(private apiService: APIService) {
   }
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodos() {
-    this.todos = this.todoService.getTodos({status: this.status, filter: this.filter});
+    this.todos = this.apiService.getTodos({status: this.status, filter: this.filter});
   }
 
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TodoFilterState} from '../../interfaces/todoFilterState';
-import {CategoryQuery} from '../../state/store.query';
-import {CategoryStoreService} from '../../state/store.service';
+import {CategoryQuery} from '../../stateOld/store.query';
+import {CategoryStoreService} from '../../stateOld/store.service';
 
 @Component({
   selector: 'app-search-filter-bar',
@@ -10,7 +10,7 @@ import {CategoryStoreService} from '../../state/store.service';
 })
 export class SearchFilterBarComponent implements OnInit {
   states: TodoFilterState[];
-  activeStatus = 'status'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global state
+  activeStatus = 'status'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
   filter = {
     name: 'description',
     value: ''

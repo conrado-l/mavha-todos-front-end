@@ -2,11 +2,15 @@
   <input type="checkbox" name="status" [ngModel]="status" (change)="finishTodo()">
   <div class="todo-description" [ngClass]="{'completed' : status}"> {{ description }}</div>
   <div class="todo-actions">
-    <div *ngIf="attachment" class="todo-download" title="Descargar archivo adjunto">
-      <button>
-        <a href="{{attachment}}" target="_blank" download>Descargar</a>
+    <div *ngIf="attachment" class="download-attachment" title="Descargar archivo adjunto">
+      <button class="button">
+        <a href="{{attachment}}" target="_blank" download>
+          <i class="material-icons">save_alt</i>
+        </a>
       </button>
     </div>
-    <button class="todo-delete-button" (click)="deleteTodo()"> Eliminar</button>
+    <button class="button todo-delete-button" (click)="deleteTodo()" title="Eliminar to-do">
+      <i class="material-icons">delete_outline</i>
+    </button>
   </div>
 </div>

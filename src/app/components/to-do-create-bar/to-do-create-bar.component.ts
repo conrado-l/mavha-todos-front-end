@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {TodosService} from "../../services/todos.service";
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {APIService} from "../../services/todos.service";
 
 @Component({
   selector: 'app-to-do-create-bar',
@@ -9,8 +9,9 @@ import {TodosService} from "../../services/todos.service";
 export class ToDoCreateBarComponent {
   description = '';
   attachment = null;
+  @ViewChild('input') attachmentInput: ElementRef;
 
-  constructor(private todoService: TodosService) {
+  constructor(private todoService: APIService) {
   }
 
   @Output() createClicked = new EventEmitter();
@@ -30,6 +31,7 @@ export class ToDoCreateBarComponent {
 
   removeAttachment(): void {
     this.attachment = null;
+    this.attachmentInput.nativeElement.value = '';
   }
 
 }

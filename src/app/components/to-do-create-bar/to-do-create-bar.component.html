@@ -3,10 +3,15 @@
          name="description"
          placeholder="Escribe aquí el nuevo to-do.."
          [(ngModel)]="description"
-         (keydown.enter)="createTodo()">
-  <label class="button upload-file-button" for="file-upload" title="Adjuntar archivo">U</label>
+         (keydown.enter)="createTodo()"
+         #input>
+  <label class="button upload-file-button" for="file-upload" title="Adjuntar archivo">
+    <i class="material-icons">attach_file</i>
+  </label>
 
-  <button class="button" (click)="createTodo()" title="Crear todo">+</button>
+  <button class="button" (click)="createTodo()" title="Crear to-do">
+    <i class="material-icons">add</i>
+  </button>
   <input type="file"
          id="file-upload"
          class="hidden"
@@ -18,5 +23,7 @@
   <div class="selected-filename">
     Archivo seleccionado: {{attachment.name}}
   </div>
-  <button class="button remove-attachment-button" (click)="removeAttachment()" title="Eliminar archivo adjunto"> X</button>
+  <button class="button remove-attachment-button" (click)="removeAttachment()" title="Eliminar archivo adjunto">
+    <i class="material-icons">clear</i>
+  </button>
 </div>

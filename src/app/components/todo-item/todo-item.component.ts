@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TodosService} from '../../services/todos.service';
+import {APIService} from '../../services/todos.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -13,7 +13,7 @@ export class TodoItemComponent {
   @Input() status: boolean;
   @Input() id: number;
 
-  constructor(private todoService: TodosService) {
+  constructor(private todoService: APIService) {
   }
 
   finishTodo() {
