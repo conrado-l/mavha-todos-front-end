@@ -8,7 +8,7 @@ import {TodoFilterState} from '../../interfaces/todoFilterState';
 })
 export class SearchFilterBarComponent implements OnInit {
   states: TodoFilterState[];
-  activeStatus = 'status'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
+  activeStatus = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
   filter = {
     name: 'description',
     value: ''
