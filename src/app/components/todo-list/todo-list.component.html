@@ -13,6 +13,7 @@
                      [status]="todo.status"
                      [id]="todo.id">
       </app-todo-item>
+      <div *ngIf="(todos | async)?.length === 0" class="no-todos-found"> No se encontraron to-dos </div>
     </div>
   </div>
 </div>

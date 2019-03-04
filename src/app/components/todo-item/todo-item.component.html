@@ -1,6 +1,6 @@
 <div class="todo-item">
   <input type="checkbox" name="status" [ngModel]="status" (change)="finishTodo()">
-  <div class="todo-description" [ngClass]="{'completed' : status}"> {{ description }}</div>
+  <div class="todo-description" [ngClass]="{'completed' : status}" title="{{description}}"> {{ description }}</div>
   <div class="todo-actions">
     <div *ngIf="attachment" class="download-attachment" title="Descargar archivo adjunto">
       <button class="button">
