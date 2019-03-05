@@ -4,10 +4,15 @@
   justify-content: space-between;
 }
 
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
 .create-input {
   height: 40px;
-  width: 80%;
-  padding: 10px;
+  width: 100%;
+  padding: 10px 40px 10px 10px;
   border-radius: 7px;
   border: 1px solid darkgrey;
   font-size: 20px;
@@ -56,6 +61,12 @@
   }
 }
 
+.actions-container {
+  display: flex;
+  align-items: center;
+  margin: 0 4px;
+}
+
 .upload-file-button {
   border: 1px solid #ccc;
   display: flex;
@@ -76,4 +87,9 @@
   margin-left: 7px;
   height: 30px;
   width: 30px;
+}
+
+.spinner {
+  position: absolute;
+  top: 20px;
 }

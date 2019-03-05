@@ -13,10 +13,22 @@
 
 .todo-list-items {
   margin: 10px 0;
+  position: relative;
 }
 
 .no-todos-found {
   text-align: center;
   margin: 20px 0;
   font-size: 18px;
+}
+
+.test {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255,255,255, 0.3);
+  z-index: 10;
 }
