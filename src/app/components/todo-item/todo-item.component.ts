@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {APIService} from '../../services/api.service';
+import {Store} from '@ngxs/store';
+import {DeleteTodo, ToggleTodo} from "../../state/todo.action";
 
 @Component({
   selector: 'app-todo-item',
@@ -13,15 +14,16 @@ export class TodoItemComponent {
   @Input() status: boolean;
   @Input() id: number;
 
-  constructor(private todoService: APIService) {
+  constructor(private store: Store) {
   }
 
-  finishTodo() {
-    this.todoService.updateTodo(this.id);
+  toggleTodo() {
+    this.store.dispatch(new ToggleTodo(this.id));
   }
 
   deleteTodo() {
-    this.todoService.deleteTodo(this.id);
+    this.store.dispatch(new DeleteTodo(this.id));
+
   }
 
 }

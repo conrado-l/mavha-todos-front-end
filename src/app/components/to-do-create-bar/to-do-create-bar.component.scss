@@ -12,6 +12,10 @@
   border: 1px solid darkgrey;
   font-size: 20px;
 
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.03); // TODO: extract to SASS variable
+  }
+
   &:focus { // Extract to SASS mixin
     outline: none;
     border: 1px solid dodgerblue;

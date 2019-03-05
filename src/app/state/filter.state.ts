@@ -25,7 +25,7 @@ export class FilterState {
     return state;
   }
 
-  @Action(UpdateSearchTerm)
+  @Action(UpdateSearchTerm, { cancelUncompleted: true }) // TODO: add input debounce
   UpdateSearchTerm({getState, setState}: StateContext<FilterStateModel>, {term}: UpdateSearchTerm) {
     const state = getState();
     setState({

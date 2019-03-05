@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {map, catchError, tap} from 'rxjs/operators';
+import {Todo} from '../state/todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,21 +24,14 @@ export class APIService {
 
   /**
    * Fetches and filters the to-dos
-   * @param {object} params Filter settings
-   * @param {object} params.filter Filter name and value
-   * @param {string} params.status Status filter
    */
-  public getTodos(params) {
+  public getTodos(filter) {
     let searchParams: any = {};
 
-    if (params) {
-      if (params.filter.value !== '') {
-        searchParams[params.filter.name] = params.filter.value;
-      }
-      if (params.status) {
-        searchParams.status = params.status;
-      }
+    if (filter.value.trim().length) {
+      searchParams[filter.type] = filter.value;
     }
+    searchParams.status = filter.status;
 
     return this.http.get(this.endpoint, {params: searchParams})
       .pipe(map(this.extractData))
@@ -60,19 +54,20 @@ export class APIService {
       form.append('file', attachment);
     }
 
-    this.http.post(this.endpoint, form).subscribe(() => this.getTodos(null).subscribe());
+    return this.http.post(this.endpoint, form).pipe(map( () => {}));
   }
 
   /**
-   * Finishes a to-do
+   * Toggles a to-do status
    * @param {number} id To-do's id
    */
-  public updateTodo(id) {
+  public toggleTodo(id) {
     if (!id) {
       return;
     }
 
-    this.http.put(this.endpoint + id, null).subscribe(() => this.getTodos(null).subscribe());
+    return this.http.put(this.endpoint + id, null).pipe(map(() => {
+    }));
   }
 
   /**
@@ -84,7 +79,8 @@ export class APIService {
       return;
     }
 
-    this.http.delete(this.endpoint + id).subscribe(() => this.getTodos(null).subscribe());
+    return this.http.delete(this.endpoint + id).pipe(map(() => {
+    }));
   }
 
 

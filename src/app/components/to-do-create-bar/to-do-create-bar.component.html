@@ -4,8 +4,8 @@
          placeholder="Escribe aquí el nuevo to-do.."
          autofocus
          [(ngModel)]="description"
-         (keydown.enter)="createTodo()"
-         #input>
+         [disabled]="loading"
+         (keydown.enter)="createTodo()">
   <label class="button upload-file-button" for="file-upload" title="Adjuntar archivo">
     <i class="material-icons">attach_file</i>
   </label>
@@ -17,7 +17,8 @@
          id="file-upload"
          class="hidden"
          accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, image/*"
-         (change)="selectAttachment($event.target.files)">
+         (change)="selectAttachment($event.target.files)"
+         #input>
 </div>
 
 <div *ngIf="attachment" class="selected-file-section">

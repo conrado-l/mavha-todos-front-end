@@ -16,6 +16,7 @@ import {FilterState} from './state/filter.state';
 import {HandlerModule} from './state/handler.module';
 import {TodoHandler} from './state/actions.handler';
 import {AutofocusModule} from 'angular-autofocus-fix';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export function noop() {
   return function () {
@@ -29,7 +30,8 @@ export function noop() {
     IntroHeaderComponent,
     TodoItemComponent,
     ToDoCreateBarComponent,
-    SearchFilterBarComponent
+    SearchFilterBarComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,11 @@
-import {State, Action, StateContext, Selector} from '@ngxs/store';
+import {State, Action, StateContext, Selector, Select, Store} from '@ngxs/store';
 import {Todo} from './todo.model';
-import {AddTodo, DeleteTodo, GetTodos, UpdateTodo} from './todo.action';
+import {CreateTodo, DeleteTodo, GetTodos, ToggleTodo} from './todo.action';
 import {APIService} from '../services/api.service';
 import {tap} from 'rxjs/operators';
+import {FilterState} from './filter.state';
+import {Observable} from 'rxjs';
+import {Filter} from './filter.model';
 
 export class TodoStateModel {
   todos: Todo[];
@@ -16,8 +19,7 @@ export class TodoStateModel {
 })
 export class TodoState {
 
-  constructor(private apiService: APIService) {
-    console.log('store created');
+  constructor(private store: Store, private apiService: APIService) {
   }
 
   @Selector()
@@ -28,7 +30,8 @@ export class TodoState {
 
   @Action(GetTodos)
   getTodos({getState, setState}: StateContext<TodoStateModel>) {
-    return this.apiService.getTodos(null).pipe(tap((result) => {
+    return this.apiService.getTodos(this.store.selectSnapshot(FilterState.getFilters)).pipe(tap((result) => {
+      console.log('list', result);
       const state = getState();
       setState({
         ...state,
@@ -37,50 +40,19 @@ export class TodoState {
     }));
   }
 
-  //
-  // @Action(AddTodo)
-  // addTodo({getState, patchState}: StateContext<TodoStateModel>, {payload}: AddTodo) {
-  //   return this.apiService.createTodo(payload).pipe(tap((result) => {
-  //     const state = getState();
-  //     patchState({
-  //       todos: [...state.todos, result]
-  //     });
-  //   }));
-  // }
-  //
-  // @Action(UpdateTodo)
-  // updateTodo({getState, setState}: StateContext<TodoStateModel>, {payload, id}: UpdateTodo) {
-  //   return this.apiService.updateTodo(id).pipe(tap((result) => {
-  //     const state = getState();
-  //     const todoList = [...state.todos];
-  //     const todoIndex = todoList.findIndex(item => item.id === id);
-  //     todoList[todoIndex] = result;
-  //     setState({
-  //       ...state,
-  //       todos: todoList,
-  //     });
-  //   }));
-  // }
-  //
-  //
-  // @Action(DeleteTodo)
-  // deleteTodo({getState, setState}: StateContext<TodoStateModel>, {id}: DeleteTodo) {
-  //   return this.apiService.deleteTodo(id).pipe(tap(() => {
-  //     const state = getState();
-  //     const filteredArray = state.todos.filter(item => item.id !== id);
-  //     setState({
-  //       ...state,
-  //       todos: filteredArray,
-  //     });
-  //   }));
-  // }
-  //
-  // @Action(SetSelectedTodo)
-  // setSelectedTodoId({getState, setState}: StateContext<TodoStateModel>, {payload}: SetSelectedTodo) {
-  //   const state = getState();
-  //   setState({
-  //     ...state,
-  //     selectedTodo: payload
-  //   });
-  // }
+
+  @Action(CreateTodo)
+  createTodo({getState, patchState}: StateContext<TodoStateModel>, {description, file}: CreateTodo) {
+    return this.apiService.createTodo(description, file);
+  }
+
+  @Action(ToggleTodo)
+  toggleTodo({getState, patchState}: StateContext<TodoStateModel>, {id}: ToggleTodo) {
+    return this.apiService.toggleTodo(id);
+  }
+
+  @Action(DeleteTodo)
+  deleteTodo({getState, setState}: StateContext<TodoStateModel>, {id}: DeleteTodo) {
+    return this.apiService.deleteTodo(id);
+  }
 }

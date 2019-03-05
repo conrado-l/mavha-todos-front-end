@@ -1,9 +1,7 @@
-import {Todo} from './todo.model';
+export class CreateTodo {
+  static readonly type = '[Todo] Create';
 
-export class AddTodo {
-  static readonly type = '[Todo] Add';
-
-  constructor(public payload: Todo) {
+  constructor(public description: string, public file: object) {
   }
 }
 
@@ -11,8 +9,8 @@ export class GetTodos {
   static readonly type = '[Todo] Get';
 }
 
-export class UpdateTodo {
-  static readonly type = '[Todo] Update';
+export class ToggleTodo {
+  static readonly type = '[Todo] Toggle';
 
   constructor(public id: number) {
   }
