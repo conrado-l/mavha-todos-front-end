@@ -1,5 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Filter} from '../../state/filter.model';
 import {TodoFilterState} from '../../interfaces/todoFilterState';
+import {FilterState} from '../../state/filter.state';
+import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from '../../state/filter.action';
+import {Select, Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {GetTodos} from '../../state/todo.action';
 
 @Component({
   selector: 'app-search-filter-bar',
@@ -8,14 +14,11 @@ import {TodoFilterState} from '../../interfaces/todoFilterState';
 })
 export class SearchFilterBarComponent implements OnInit {
   states: TodoFilterState[];
-  activeStatus = 'all'; // TODO: use flux pattern (NGRX/RxJS/Akita) for managing global stateOld
-  filter = {
-    name: 'description',
-    value: ''
-  };
-  @Output() termInput = new EventEmitter();
-  @Output() filterChange = new EventEmitter();
-  @Output() statusChange = new EventEmitter();
+
+  constructor(private store: Store) {
+  }
+
+  @Select(FilterState.getFilters) filter$: Observable<Filter>;
 
   ngOnInit() {
     this.states = [
@@ -34,18 +37,16 @@ export class SearchFilterBarComponent implements OnInit {
     ];
   }
 
-  updateSearchTerm(description: string) {
-    this.termInput.emit(description);
+  updateSearchTerm(term: string) {
+    this.store.dispatch(new UpdateSearchTerm(term));
   }
 
-  updateFilter(filter: string) {
-    this.filter.name = filter;
-    this.filterChange.emit(filter);
+  updateFilterType(type: string) {
+    this.store.dispatch(new UpdateFilterType(type));
   }
 
   updateStatus(status: string): void {
-    this.activeStatus = status;
-    this.statusChange.emit(status);
+    this.store.dispatch(new UpdateStatus(status));
   }
 
 }

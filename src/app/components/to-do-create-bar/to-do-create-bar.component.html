@@ -2,6 +2,7 @@
   <input class="create-input"
          name="description"
          placeholder="Escribe aquí el nuevo to-do.."
+         autofocus
          [(ngModel)]="description"
          (keydown.enter)="createTodo()"
          #input>

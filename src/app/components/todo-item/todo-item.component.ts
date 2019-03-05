@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {APIService} from '../../services/todos.service';
+import {APIService} from '../../services/api.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -17,7 +17,7 @@ export class TodoItemComponent {
   }
 
   finishTodo() {
-    this.todoService.finishTodo(this.id);
+    this.todoService.updateTodo(this.id);
   }
 
   deleteTodo() {

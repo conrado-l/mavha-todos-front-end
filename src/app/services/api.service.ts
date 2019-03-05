@@ -67,7 +67,7 @@ export class APIService {
    * Finishes a to-do
    * @param {number} id To-do's id
    */
-  public finishTodo(id) {
+  public updateTodo(id) {
     if (!id) {
       return;
     }

@@ -4,7 +4,7 @@
          name="search-term"
          autocomplete="off"
          (keyup)="updateSearchTerm($event.target.value)">
-  <select class="select-filter" name="filter" (change)="updateFilter($event.target.value)">
+  <select class="select-filter" name="filter" (change)="updateFilterType($event.target.value)">
     <option value="description" selected> Descripción</option>
     <option value="id"> ID</option>
   </select>
@@ -12,7 +12,7 @@
     <div class="select-status-option"
          title="Filtrar {{state.name | lowercase}}"
          *ngFor="let state of states"
-         [ngClass]="{'active' : activeStatus === state.value}"
+         [ngClass]="{'active' : (filter$ | async)?.status === state.value}"
          (click)="updateStatus(state.value)">
       <span class="select-status-option-text"> {{state.name}} </span>
     </div>
