@@ -1,6 +1,10 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {CreateTodo} from '../../state/todo.action';
-import {Store} from '@ngxs/store';
+import {CreateFailed, CreateSuccess, CreateTodo} from '../../state/todo.action';
+import {Select, Store, Actions, ofActionSuccessful, ofActionCompleted} from '@ngxs/store';
+import {SnotifyService} from 'ng-snotify';
+import {TodoState} from '../../state/todo.state';
+import {Observable} from 'rxjs';
+import {Todo} from '../../state/todo.model';
 
 @Component({
   selector: 'app-to-do-create-bar',
@@ -14,8 +18,9 @@ export class ToDoCreateBarComponent implements OnInit {
 
   // Access the DOM input file element
   @ViewChild('input') attachmentInput: ElementRef;
+  @Select(TodoState.getTodoList) todos: Observable<Todo[]>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private actions: Actions, private snotifyService: SnotifyService) {
   }
 
   @Output() createClicked = new EventEmitter();
@@ -24,6 +29,26 @@ export class ToDoCreateBarComponent implements OnInit {
     this.description = '';
     this.attachment = null;
     this.loading = false;
+
+    // Notify success
+    this.actions.pipe(ofActionSuccessful(CreateSuccess)).subscribe(() => {
+        this.description = '';
+        this.attachment = null;
+        this.snotifyService.success('El to-do fue creado exitosamente');
+      }
+    );
+
+    // Notify failure
+    this.actions.pipe(ofActionSuccessful(CreateFailed)).subscribe(() => {
+        this.snotifyService.error('Se produjo un error al crear el to-do');
+      }
+    );
+
+    // Hide spinner and enable input on completion
+    this.actions.pipe(ofActionCompleted(CreateSuccess, CreateFailed)).subscribe(() => {
+        this.loading = false;
+      }
+    );
   }
 
   createTodo(): void {
@@ -36,11 +61,7 @@ export class ToDoCreateBarComponent implements OnInit {
     this.loading = true;
 
     // Create the to-do, wait for creation and reset the data for the next one
-    this.store.dispatch(new CreateTodo(this.description, this.attachment)).subscribe(() => {
-      this.loading = false;
-      this.description = ''; // TODO: check for errors
-      this.attachment = null;
-    });
+    this.store.dispatch(new CreateTodo(this.description, this.attachment));
   }
 
   selectAttachment(files): void {

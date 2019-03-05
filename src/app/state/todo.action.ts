@@ -22,3 +22,10 @@ export class DeleteTodo {
   constructor(public id: number) {
   }
 }
+
+export class CreateSuccess {
+  static readonly type = '[Todo] CreateSuccess';
+}
+export class CreateFailed {
+  static readonly type = '[Todo] CreateFailed';
+}

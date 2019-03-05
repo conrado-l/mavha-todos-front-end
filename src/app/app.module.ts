@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
 import {TodoListComponent} from './components/todo-list/todo-list.component';
@@ -18,7 +18,9 @@ import {HandlerModule} from './state/handler.module';
 import {TodoHandler} from './state/actions.handler';
 import {AutofocusModule} from 'angular-autofocus-fix';
 import {SpinnerComponent} from './components/spinner/spinner.component';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
+// Workaround for using action handlers when Angular initializes
 export function noop() {
   return function () {
   };
@@ -32,7 +34,7 @@ export function noop() {
     TodoItemComponent,
     ToDoCreateBarComponent,
     SearchFilterBarComponent,
-    SpinnerComponent
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +46,12 @@ export function noop() {
     NgxsLoggerPluginModule.forRoot(),
     HandlerModule.forRoot([TodoHandler]),
     AutofocusModule,
+    SnotifyModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

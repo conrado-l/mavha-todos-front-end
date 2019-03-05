@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {map, catchError, tap} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
+import {map, catchError, tap, finalize} from 'rxjs/operators';
 import {Todo} from '../state/todo.model';
+import {SnotifyService} from 'ng-snotify';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class APIService {
     })
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snotifyService: SnotifyService) {
   }
 
   private extractData(res) {
@@ -32,6 +34,8 @@ export class APIService {
       searchParams[filter.type] = filter.value;
     }
     searchParams.status = filter.status;
+    // Gets all the to-dos with no pagination
+    searchParams.limit = 0;  // TODO: remove when pagination is implemented
 
     return this.http.get(this.endpoint, {params: searchParams})
       .pipe(map(this.extractData))
@@ -43,7 +47,7 @@ export class APIService {
    * @param {string} description To-do description
    * @param {file} attachment To-do attachment
    */
-  public createTodo(description, attachment) {
+  public createTodo(description, attachment): Observable<any> {
     if (!description.trim().length) {
       return;
     }
@@ -54,7 +58,12 @@ export class APIService {
       form.append('file', attachment);
     }
 
-    return this.http.post(this.endpoint, form).pipe(map( () => {}));
+    return this.http.post(this.endpoint, form).pipe(
+      map(res => res),
+      catchError(err => {
+        return throwError(err);
+      }),
+    );
   }
 
   /**
@@ -83,18 +92,30 @@ export class APIService {
     }));
   }
 
+  // private handleError<T>(operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
+  //
+  //     // TODO: send the error to remote logging infrastructure
+  //     console.error(error); // log to console instead
+  //
+  //     // TODO: better job of transforming error for user consumption
+  //     console.log(`${operation} failed: ${error.message}`);
+  //
+  //     // Let the app keep running by returning an empty result.
+  //     return of(result as T);
+  //   };
+  // }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+  private handleError(operation: string) {
+    return (err: any) => {
+      let errMsg = `error in ${operation}() retrieving ${this.endpoint}`;
+      console.log(`${errMsg}:`, err)
+      if (err instanceof HttpErrorResponse) {
+        // you could extract more info about the error if you want, e.g.:
+        console.log(`status: ${err.status}, ${err.statusText}`);
+        // errMsg = ...
+      }
+      return throwError(errMsg);
     };
   }
 
