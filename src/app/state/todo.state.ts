@@ -1,4 +1,4 @@
-import {State, Action, StateContext, Selector, Select, Store} from '@ngxs/store';
+import {State, Action, StateContext, Selector, Store} from '@ngxs/store';
 import {Todo} from './todo.model';
 import {
   CreateFailed,
@@ -12,7 +12,6 @@ import {
 import {APIService} from '../services/api.service';
 import {catchError, map, tap} from 'rxjs/operators';
 import {FilterState} from './filter.state';
-import {Observable, throwError} from "rxjs";
 
 export class TodoStateModel {
   todos: Todo[];
@@ -42,12 +41,11 @@ export class TodoState {
           ...state,
           todos: result,
         });
-        dispatch(new GetTodosSuccess());
+        setTimeout(() => dispatch(new GetTodosSuccess()), 10); // Workaround for NGXS out of order actions
       }),
       catchError(() => dispatch(new GetTodosFailure()))
     );
   }
-
 
   @Action(CreateTodo)
   createTodo({getState, patchState, dispatch}: StateContext<TodoStateModel>, {description, file}: CreateTodo) {

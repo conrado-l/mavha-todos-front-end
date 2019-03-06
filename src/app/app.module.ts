@@ -19,6 +19,7 @@ import {TodoHandler} from './state/actions.handler';
 import {AutofocusModule} from 'angular-autofocus-fix';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {NgxLoadingModule} from 'ngx-loading';
 
 // Workaround for using action handlers when Angular initializes
 export function noop() {
@@ -46,7 +47,8 @@ export function noop() {
     NgxsLoggerPluginModule.forRoot(),
     HandlerModule.forRoot([TodoHandler]),
     AutofocusModule,
-    SnotifyModule.forRoot()
+    SnotifyModule.forRoot(),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},

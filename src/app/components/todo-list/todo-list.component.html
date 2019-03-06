@@ -7,14 +7,16 @@
     <hr>
     <app-to-do-create-bar></app-to-do-create-bar>
     <div class="todo-list-items">
-      <div class="overlay">
-        <app-todo-item *ngFor="let todo of todos | async"
-                       [description]="todo.description"
-                       [attachment]="todo.attachment"
-                       [status]="todo.status"
-                       [id]="todo.id">
-        </app-todo-item>
-      </div>
+
+      <ngx-loading [show]="loading"
+                   [config]="{animationType: ngxLoadingAnimationTypes.circle, backdropBackgroundColour: 'rgba(255,255,255,0.8)',
+                   backdropBorderRadius: '0', primaryColour: primaryColour, secondaryColour:secondaryColour}"></ngx-loading>
+      <app-todo-item *ngFor="let todo of todos | async"
+                     [description]="todo.description"
+                     [attachment]="todo.attachment"
+                     [status]="todo.status"
+                     [id]="todo.id">
+      </app-todo-item>
       <div *ngIf="(todos | async)?.length === 0" class="no-todos-found"> No se encontraron to-dos</div>
     </div>
   </div>
