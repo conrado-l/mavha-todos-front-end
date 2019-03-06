@@ -1,6 +1,14 @@
 import {State, Action, StateContext, Selector, Select, Store} from '@ngxs/store';
 import {Todo} from './todo.model';
-import {CreateFailed, CreateSuccess, CreateTodo, DeleteTodo, GetTodos, ToggleTodo} from './todo.action';
+import {
+  CreateFailed,
+  CreateSuccess,
+  CreateTodo,
+  DeleteTodo,
+  GetTodos, GetTodosFailure,
+  GetTodosSuccess,
+  ToggleTodo
+} from './todo.action';
 import {APIService} from '../services/api.service';
 import {catchError, map, tap} from 'rxjs/operators';
 import {FilterState} from './filter.state';
@@ -27,14 +35,17 @@ export class TodoState {
   }
 
   @Action(GetTodos)
-  getTodos({getState, setState}: StateContext<TodoStateModel>) {
+  getTodos({getState, setState, dispatch}: StateContext<TodoStateModel>) {
     return this.apiService.getTodos(this.store.selectSnapshot(FilterState.getFilters)).pipe(tap((result) => {
-      const state = getState();
-      setState({
-        ...state,
-        todos: result,
-      });
-    }));
+        const state = getState();
+        setState({
+          ...state,
+          todos: result,
+        });
+        dispatch(new GetTodosSuccess());
+      }),
+      catchError(() => dispatch(new GetTodosFailure()))
+    );
   }
 
 

@@ -1,23 +1,17 @@
 import {Injectable} from '@angular/core';
-import {Actions, ofActionErrored, ofActionSuccessful, Store} from '@ngxs/store';
-import {CreateTodo, DeleteTodo, GetTodos, ToggleTodo} from './todo.action';
+import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
+import {CreateSuccess, DeleteTodo, GetTodos, ToggleTodo} from './todo.action';
 import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from './filter.action';
-import {SnotifyService} from 'ng-snotify';
 
 @Injectable()
 export class TodoHandler {
-  constructor(private store: Store, private actions$: Actions, private snotifyService: SnotifyService) {
+  constructor(private store: Store, private actions$: Actions) {
 
+    // TODO: add positive and negative feedback for every action
     actions$
-      .pipe(ofActionSuccessful(UpdateSearchTerm, UpdateStatus, UpdateFilterType, CreateTodo, ToggleTodo, DeleteTodo))
+      .pipe(ofActionSuccessful(UpdateSearchTerm, UpdateStatus, UpdateFilterType, CreateSuccess, ToggleTodo, DeleteTodo))
       .subscribe(() => {
         this.store.dispatch(new GetTodos());
-      });
-
-    actions$
-      .pipe(ofActionErrored(GetTodos))
-      .subscribe(() => {
-        this.snotifyService.error('Se produjo un error al obtener los todos');
       });
   }
 }

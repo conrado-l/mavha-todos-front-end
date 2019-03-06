@@ -1,3 +1,5 @@
+// TODO: create actions for search, filter, update and delete
+
 export class CreateTodo {
   static readonly type = '[Todo] Create';
 
@@ -26,6 +28,17 @@ export class DeleteTodo {
 export class CreateSuccess {
   static readonly type = '[Todo] CreateSuccess';
 }
+
 export class CreateFailed {
   static readonly type = '[Todo] CreateFailed';
 }
+
+export class GetTodosSuccess {
+  static readonly type = '[Todo] GetTodosSuccess';
+}
+
+export class GetTodosFailure {
+  static readonly type = '[Todo] GetTodosFailure';
+}
+
+

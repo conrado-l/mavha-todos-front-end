@@ -1,14 +1,16 @@
 <div class="search-filter-bar">
-  <input class="search-input"
-         placeholder="Buscar"
-         name="search-term"
-         autocomplete="off"
-         (keyup)="updateSearchTerm($event.target.value)">
-  <select class="select-filter" name="filter" (change)="updateFilterType($event.target.value)">
-    <option value="description" selected> Descripción</option>
-    <option value="id"> ID</option>
-  </select>
-  <div class="select-status-container" >
+  <div class="search-input-select-container">
+    <input class="search-input"
+           placeholder="Buscar"
+           name="search-term"
+           autocomplete="off"
+           (keyup)="updateSearchTerm($event.target.value)">
+    <select class="select-filter" name="filter" (change)="updateFilterType($event.target.value)">
+      <option value="description" selected> Descripción</option>
+      <option value="id"> ID</option>
+    </select>
+  </div>
+  <div class="select-status-container">
     <div class="select-status-option"
          title="Filtrar {{state.name | lowercase}}"
          *ngFor="let state of states"

@@ -17,7 +17,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 78%;
+  max-width: 400px;
 
   &.completed {
     text-decoration: line-through;
@@ -45,3 +45,10 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+@media screen and (max-width: 480px) {
+  .todo-description {
+    max-width: 200px;
+  }
+}
+
