@@ -20,6 +20,7 @@ export class TodoListComponent implements OnInit {
   ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
   primaryColour = 'dodgerblue'; // TODO: extract to file for reutilization
   secondaryColour = 'white'; // TODO: extract to file for reutilization
+  backdropBackgroundColour = 'rgba(255,255,255,0.8)'; // TODO: extract to file for reutilization
 
   constructor(private store: Store, private actions: Actions, private snotifyService: SnotifyService) {
   }

@@ -9,7 +9,7 @@
     <div class="todo-list-items">
 
       <ngx-loading [show]="loading"
-                   [config]="{animationType: ngxLoadingAnimationTypes.circle, backdropBackgroundColour: 'rgba(255,255,255,0.8)',
+                   [config]="{animationType: ngxLoadingAnimationTypes.circle, backdropBackgroundColour: backdropBackgroundColour,
                    backdropBorderRadius: '0', primaryColour: primaryColour, secondaryColour:secondaryColour}"></ngx-loading>
       <app-todo-item *ngFor="let todo of todos | async"
                      [description]="todo.description"
