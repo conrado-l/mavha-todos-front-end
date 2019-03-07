@@ -24,6 +24,8 @@
     background-color: $input-disabled-background-color; // TODO: extract to SASS variable
   }
 
+  @include input-focus;
+
   @include focus-no-outline;
 
   @include hide-placeholder-on-focus;
