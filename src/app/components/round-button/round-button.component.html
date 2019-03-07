@@ -1,0 +1,4 @@
+<button [ngClass]="classes" (click)="clicked()" [title]="title">
+  <i *ngIf="icon" class="material-icons">{{icon}}</i>
+  <ng-content></ng-content>
+</button>

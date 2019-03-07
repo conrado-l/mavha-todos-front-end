@@ -1,0 +1,40 @@
+@import "../../styles/variables";
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  margin: 0 5px;
+  border: none;
+  border-radius: $button-high-border-radius;
+  background-color: $button-light-background-color;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.small {
+  height: 30px;
+  width: 30px;
+}
+
+.medium {
+  height: 35px;
+  width: 35px;
+}
+
+.large {
+  height: 40px;
+  width: 40px;
+}
+
+.light {
+  background-color: $button-light-background-color;
+}
+
+.dark {
+  background-color: $button-dark-background-color;
+}

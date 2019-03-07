@@ -1,0 +1,8 @@
+@import "../../styles/variables.scss";
+
+.container {
+  max-width: 600px;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  box-shadow: $box-horizontal-shadow, $box-vertical-shadow;
+}
