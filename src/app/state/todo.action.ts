@@ -17,6 +17,18 @@ export class ToggleTodo {
   constructor(public id: number) {
   }
 }
+export class ToggleSuccess {
+  static readonly type = '[Todo] ToggleSuccess';
+
+  constructor(public id: number) {
+  }
+}
+export class ToggleFailed {
+  static readonly type = '[Todo] ToggleFailed';
+
+  constructor(public id: number) {
+  }
+}
 
 export class DeleteTodo {
   static readonly type = '[Todo] Delete';

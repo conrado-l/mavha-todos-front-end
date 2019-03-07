@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
-import {CreateSuccess, DeleteTodo, GetTodos, ToggleTodo} from './todo.action';
+import {CreateSuccess, DeleteTodo, GetTodos, ToggleSuccess} from './todo.action';
 import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from './filter.action';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class TodoHandler {
 
     // TODO: add positive and negative feedback for every action
     actions$
-      .pipe(ofActionSuccessful(UpdateSearchTerm, UpdateStatus, UpdateFilterType, CreateSuccess, ToggleTodo, DeleteTodo))
+      .pipe(ofActionSuccessful(UpdateSearchTerm, UpdateStatus, UpdateFilterType, CreateSuccess, ToggleSuccess, DeleteTodo))
       .subscribe(() => {
         this.store.dispatch(new GetTodos());
       });

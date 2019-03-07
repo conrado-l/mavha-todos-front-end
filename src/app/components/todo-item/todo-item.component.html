@@ -1,5 +1,6 @@
 <div class="todo-item">
-  <input type="checkbox" name="status" [ngModel]="status" (change)="toggleTodo()">
+  <app-spinner *ngIf="toggling"></app-spinner>
+  <input *ngIf="!toggling" type="checkbox" name="status" [ngModel]="status" (change)="toggleTodo()">
   <div class="todo-description" [ngClass]="{'completed' : status}" title="{{description}}"> {{ description }}</div>
   <div class="todo-actions">
     <app-round-button *ngIf="attachment" size="medium" backgroundColor="light" icon="save_alt" title="Descargar archivo adjunto" (click)="downloadAttachment()">

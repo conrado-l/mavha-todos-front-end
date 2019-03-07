@@ -6,7 +6,7 @@ import {
   CreateTodo,
   DeleteTodo,
   GetTodos, GetTodosFailure,
-  GetTodosSuccess,
+  GetTodosSuccess, ToggleFailed, ToggleSuccess,
   ToggleTodo
 } from './todo.action';
 import {APIService} from '../services/api.service';
@@ -50,14 +50,17 @@ export class TodoState {
   @Action(CreateTodo)
   createTodo({getState, patchState, dispatch}: StateContext<TodoStateModel>, {description, file}: CreateTodo) {
     return this.apiService.createTodo(description, file).pipe(
-      tap(resp => dispatch(new CreateSuccess())),
-      catchError(error => dispatch(new CreateFailed()))
+      tap(() => dispatch(new CreateSuccess())),
+      catchError(() => dispatch(new CreateFailed()))
     );
   }
 
   @Action(ToggleTodo)
-  toggleTodo({getState, patchState}: StateContext<TodoStateModel>, {id}: ToggleTodo) {
-    return this.apiService.toggleTodo(id);
+  toggleTodo({getState, patchState, dispatch}: StateContext<TodoStateModel>, {id}: ToggleTodo) {
+    return this.apiService.toggleTodo(id).pipe(
+      tap(() => setTimeout(() => dispatch(new ToggleSuccess(id)), 10),
+      catchError(() => dispatch(new ToggleFailed(id)))
+    ));
   }
 
   @Action(DeleteTodo)
