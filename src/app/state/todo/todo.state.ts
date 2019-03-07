@@ -9,9 +9,9 @@ import {
   GetTodosSuccess, ToggleFailed, ToggleSuccess,
   ToggleTodo
 } from './todo.action';
-import {APIService} from '../services/api.service';
-import {catchError, map, tap} from 'rxjs/operators';
-import {FilterState} from './filter.state';
+import {APIService} from '../../services/api.service';
+import {catchError, tap} from 'rxjs/operators';
+import {FilterState} from '../filter/filter.state';
 
 export class TodoStateModel {
   todos: Todo[];
@@ -41,7 +41,7 @@ export class TodoState {
           ...state,
           todos: result,
         });
-        setTimeout(() => dispatch(new GetTodosSuccess()), 10); // Workaround for NGXS out of order actions
+        setTimeout(() => dispatch(new GetTodosSuccess()), 10); // Workaround for NGXS parent-child action completion
       }),
       catchError(() => dispatch(new GetTodosFailure()))
     );
@@ -51,16 +51,15 @@ export class TodoState {
   createTodo({getState, patchState, dispatch}: StateContext<TodoStateModel>, {description, file}: CreateTodo) {
     return this.apiService.createTodo(description, file).pipe(
       tap(() => dispatch(new CreateSuccess())),
-      catchError(() => dispatch(new CreateFailed()))
-    );
+      catchError((err) => dispatch(new CreateFailed(err))));
   }
 
   @Action(ToggleTodo)
   toggleTodo({getState, patchState, dispatch}: StateContext<TodoStateModel>, {id}: ToggleTodo) {
     return this.apiService.toggleTodo(id).pipe(
-      tap(() => setTimeout(() => dispatch(new ToggleSuccess(id)), 10),
-      catchError(() => dispatch(new ToggleFailed(id)))
-    ));
+      tap(() => setTimeout(() => dispatch(new ToggleSuccess(id)), 10), // Workaround for NGXS parent-child action completion
+        catchError(() => dispatch(new ToggleFailed(id)))
+      ));
   }
 
   @Action(DeleteTodo)

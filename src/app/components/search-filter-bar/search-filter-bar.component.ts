@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Filter} from '../../state/filter.model';
+import {Filter} from '../../state/filter/filter.model';
 import {TodoFilterState} from '../../interfaces/todoFilterState';
-import {FilterState} from '../../state/filter.state';
-import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from '../../state/filter.action';
+import {FilterState} from '../../state/filter/filter.state';
+import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from '../../state/filter/filter.action';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 

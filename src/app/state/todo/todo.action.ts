@@ -43,6 +43,8 @@ export class CreateSuccess {
 
 export class CreateFailed {
   static readonly type = '[Todo] CreateFailed';
+  constructor(public response: object) {
+  }
 }
 
 export class GetTodosSuccess {

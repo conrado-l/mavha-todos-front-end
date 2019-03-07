@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store, Actions, ofActionDispatched} from '@ngxs/store';
-import {DeleteTodo, ToggleFailed, ToggleSuccess, ToggleTodo} from '../../state/todo.action';
+import {DeleteTodo, ToggleFailed, ToggleSuccess, ToggleTodo} from '../../state/todo/todo.action';
 
 @Component({
   selector: 'app-todo-item',

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
-import {CreateSuccess, DeleteTodo, GetTodos, ToggleSuccess} from './todo.action';
-import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from './filter.action';
+import {CreateSuccess, DeleteTodo, GetTodos, ToggleSuccess} from './todo/todo.action';
+import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from './filter/filter.action';
 
 @Injectable()
 export class TodoHandler {

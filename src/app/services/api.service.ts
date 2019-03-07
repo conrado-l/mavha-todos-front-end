@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import {map, catchError, tap, finalize} from 'rxjs/operators';
-import {Todo} from '../state/todo.model';
+import {Todo} from '../state/todo/todo.model';
 import {SnotifyService} from 'ng-snotify';
 
 

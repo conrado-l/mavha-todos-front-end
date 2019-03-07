@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Select, Store, Actions, ofAction} from '@ngxs/store';
-import {Todo} from '../../state/todo.model';
-import {TodoState} from '../../state/todo.state';
-import {GetTodos, GetTodosFailure, GetTodosSuccess} from '../../state/todo.action';
+import {Todo} from '../../state/todo/todo.model';
+import {TodoState} from '../../state/todo/todo.state';
+import {GetTodos, GetTodosFailure, GetTodosSuccess} from '../../state/todo/todo.action';
 import {SnotifyService} from 'ng-snotify';
 import {ngxLoadingAnimationTypes} from 'ngx-loading';
 
