@@ -18,6 +18,8 @@ export class ToDoCreateBarComponent implements OnInit {
 
   // Access the DOM input file element
   @ViewChild('input') attachmentInput: ElementRef;
+
+  // Get todos from the store
   @Select(TodoState.getTodoList) todos: Observable<Todo[]>;
 
   constructor(private store: Store, private actions: Actions, private snotifyService: SnotifyService) {

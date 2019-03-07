@@ -5,7 +5,6 @@ import {FilterState} from '../../state/filter.state';
 import {UpdateFilterType, UpdateSearchTerm, UpdateStatus} from '../../state/filter.action';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {GetTodos} from '../../state/todo.action';
 
 @Component({
   selector: 'app-search-filter-bar',

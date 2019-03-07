@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
 .todo-create-bar {
   display: flex;
   align-items: center;
@@ -18,30 +21,12 @@
   font-size: 20px;
 
   &:disabled {
-    background-color: rgba(0, 0, 0, 0.03); // TODO: extract to SASS variable
+    background-color: $input-disabled-background-color; // TODO: extract to SASS variable
   }
 
-  &:focus { // Extract to SASS mixin
-    outline: none;
-    border: 1px solid dodgerblue;
-  }
+  @include focus-no-outline;
 
-  &:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-  /* Hide placeholder on focus */
-  &:focus:-moz-placeholder {
-    color: transparent;
-  }
-  /* FF 4-18 */
-  &:focus::-moz-placeholder {
-    color: transparent;
-  }
-  /* FF 19+ */
-  &:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-  /* IE 10+ */
+  @include hide-placeholder-on-focus;
 }
 
 .button {

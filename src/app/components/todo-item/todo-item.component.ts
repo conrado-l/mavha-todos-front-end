@@ -23,7 +23,14 @@ export class TodoItemComponent {
 
   deleteTodo() {
     this.store.dispatch(new DeleteTodo(this.id));
+  }
 
+  downloadAttachment() {
+    var link = document.createElement('a');
+    link.href = this.attachment;
+    link.target = '_blank';
+    link.download = this.attachment;
+    link.click();
   }
 
 }

@@ -1,5 +1,10 @@
-<div class="container>"> <!--Improve components structure and responsabilities-->
+<div class="container>">
   <ng-snotify></ng-snotify>
   <app-intro-header></app-intro-header>
-  <app-todo-list></app-todo-list>
+  <app-box-container>
+    <app-search-filter-bar></app-search-filter-bar>
+    <hr>
+    <app-to-do-create-bar></app-to-do-create-bar>
+    <app-todo-list></app-todo-list>
+  </app-box-container>
 </div>

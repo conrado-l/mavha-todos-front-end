@@ -20,6 +20,9 @@ import {AutofocusModule} from 'angular-autofocus-fix';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NgxLoadingModule} from 'ngx-loading';
+import {InputClearComponent} from './components/input-clear/input-clear.component';
+import {BoxContainerComponent} from './components/box-container/box-container.component';
+import { RoundButtonComponent } from './components/round-button/round-button.component';
 
 // Workaround for using action handlers when Angular initializes
 export function noop() {
@@ -36,6 +39,9 @@ export function noop() {
     ToDoCreateBarComponent,
     SearchFilterBarComponent,
     SpinnerComponent,
+    InputClearComponent,
+    BoxContainerComponent,
+    RoundButtonComponent,
   ],
   imports: [
     BrowserModule,

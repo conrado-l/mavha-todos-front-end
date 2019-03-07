@@ -1,3 +1,6 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
 .search-filter-bar {
   display: flex;
   justify-content: space-between;
@@ -17,42 +20,21 @@
   height: 35px;
   padding: 10px;
   border: 1px solid gainsboro;
-  border-radius: 20px; // TODO: extract to SASS variable
+  border-radius: $input-high-border-radius;
   font-size: 15px;
 
-  &:focus { // Extract to SASS mixin
-    outline: none;
-    border: 1px solid dodgerblue;
-  }
+  @include input-focus;
 
-  &:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-  /* Hide placeholder on focus */
-  // Extract to SASS mixin
-  &:focus:-moz-placeholder {
-    color: transparent;
-  }
-  /* FF 4-18 */
-  &:focus::-moz-placeholder {
-    color: transparent;
-  }
-  /* FF 19+ */
-  &:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-  /* IE 10+ */
+  @include hide-placeholder-on-focus;
 }
 
 .select-filter {
   height: 35px;
   border: 1px solid gainsboro;
-  border-radius: 7px; // TODO: extract to SASS variable
+  border-radius: $select-low-border-radius;
   font-size: 15px;
 
-  &:focus {
-    outline: none;
-  }
+  @include focus-no-outline;
 }
 
 .select-status-container {
@@ -68,22 +50,21 @@
   height: 35px;
   margin: 0 2px;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.08); // Use SASS transparentize and extract
-  border-radius: 20px;
+  background-color: $input-light-background;
+  border-radius: $input-high-border-radius;
   cursor: pointer;
 
   &.active {
-    background-color: #1e90ff4d;
+    background-color: $secondary-color;
   }
 }
 
 .select-status-option-text {
-  color: rgba(0, 0, 0, .87); // Extract to SASS variable
   font-size: 14px;
   user-select: none;
 }
 
-@media screen and (max-width: 480px) {
+@include mobile {
   .search-filter-bar {
     flex-direction: column;
     height: auto;

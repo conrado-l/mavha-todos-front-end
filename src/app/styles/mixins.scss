@@ -1,0 +1,43 @@
+@mixin mobile() {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin input-focus {
+  &:focus {
+    outline: none;
+    border: 1px solid $primary-color;
+  }
+}
+
+@mixin focus-no-outline {
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin text-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin hide-placeholder-on-focus {
+  &:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+  &:focus:-moz-placeholder {
+    color: transparent;
+  }
+  /* FF 4-18 */
+  &:focus::-moz-placeholder {
+    color: transparent;
+  }
+  /* FF 19+ */
+  &:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+  /* IE 10+ */
+
+}

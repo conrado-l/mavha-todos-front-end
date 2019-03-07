@@ -1,3 +1,5 @@
+@import "../../styles/mixins.scss";
+
 .todo-item {
   display: flex;
   align-items: center;
@@ -14,10 +16,8 @@
   display: inline-block;
   position: relative;
   left: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   max-width: 400px;
+  @include text-ellipsis;
 
   &.completed {
     text-decoration: line-through;
