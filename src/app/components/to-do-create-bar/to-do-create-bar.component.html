@@ -14,20 +14,23 @@
       <i class="material-icons">attach_file</i>
     </label>
 
-    <app-round-button size="large" backgroundColor="dark" icon="add" title="Crear to-do" (buttonClicked)="createTodo()">
-    </app-round-button>
     <input type="file"
            id="file-upload"
            class="hidden"
            accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, image/*"
            (change)="selectAttachment($event.target.files)"
            #input>
+
+    <app-round-button size="large" backgroundColor="dark" icon="add" title="Crear to-do" (buttonClicked)="createTodo()">
+    </app-round-button>
+
   </div>
 </div>
 <div *ngIf="attachment" class="selected-file-section">
-  <div class="selected-filename">
-    Archivo adjunto seleccionado: {{attachment.name}}
+  <div class="selected-filename" title="{{attachment.name}}">
+    Archivo seleccionado: {{attachment.name}}
   </div>
-  <app-round-button size="small" backgroundColor="light" icon="clear" title="Descartar archivo adjunto" (click)="removeAttachment()">
+  <app-round-button size="small" backgroundColor="light" icon="clear" title="Descartar archivo adjunto"
+                    (click)="removeAttachment()">
   </app-round-button>
 </div>

@@ -68,6 +68,11 @@
   margin: 15px 0;
 }
 
+.selected-filename {
+  max-width: 425px;
+  @include text-ellipsis;
+}
+
 .remove-attachment-button {
   margin-left: 7px;
   height: 30px;

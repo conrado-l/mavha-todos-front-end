@@ -32,24 +32,7 @@
   align-items: center;
 }
 
-.download-attachment {
-  text-decoration: none;
-  color: black;
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  width: 35px;
-  margin: 0 5px;
-  border: 1px solid lightgray;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 480px) {
+@include mobile {
   .todo-description {
     max-width: calc(65vw - 95px);
   }
