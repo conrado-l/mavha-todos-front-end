@@ -4,7 +4,7 @@
 ## Setup
 
 #### Requirements
-* NodeJS 8.11.0+
+* NodeJS 10.15.2
 
 #### Dependencies
 ```
