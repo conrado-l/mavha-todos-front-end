@@ -1,4 +1,4 @@
-# MAvha's To-Do Front-end
+# To-Do Front-end
 
 
 ## Setup
