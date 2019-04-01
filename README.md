@@ -3,6 +3,9 @@
 
 ## Setup
 
+#### Requirements
+* NodeJS 8.11.0+
+
 #### Dependencies
 ```
 npm install
